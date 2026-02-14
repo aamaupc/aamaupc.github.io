@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applied Mathematics Student Association</title>
+    <link rel="icon" type="image/png" href="static/faVicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        'upc-dark': '#122C43',
+                        'upc-blue': '#00599C',
+                        'upc-cream': '#EAE0D5',
+                        'upc-light': '#F5F5F5',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+            scroll-snap-type: y proximity;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f9fafb;
+            position: relative;
+            min-height: 100vh;
+        }
+        .navbar-scrolled {
+            box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.1);
+        }
+        #hero, #about, #projects, #recruitment, #sponsors {
+            position: relative;
+            z-index: 1;
+        }
+        #particles-js {
+            position: fixed !important;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2 !important;
+        }
+        section, footer {
+            scroll-snap-align: start;
+            scroll-margin-top: 4rem;
+        }
+    </style>
+</head>
+
+<body class="text-gray-800">
+    <div id="particles-js" class="absolute top-0 left-0 w-full h-full" style="z-index: -2;"></div>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>    <script>
+        particlesJS('particles-js', {
+        "particles": {
+            "number": {
+                "value": 100,
+                "density": {
+                    "enable": true,
+                    "value_area": 800
+                }
+            },
+            "color": {
+                "value": "#122C43"
+            },
+            "shape": {
+                "type": "circle",
+                "stroke": {
+                    "width": 0,
+                    "color": "#000000"
+                },
+                "polygon": {
+                    "nb_sides": 5
+                }
+            },
+            "opacity": {
+                "value": 0.2,
+                "random": false,
+                "anim": {
+                    "enable": false
+                }
+            },
+            "size": {
+                "value": 3,
+                "random": true,
+                "anim": {
+                    "enable": false
+                }
+            },
+            "line_linked": {
+                "enable": true,
+                "distance": 150,
+                "color": "#00599C",
+                "opacity": 0.15,
+                "width": 1
+            },
+            "move": {
+                "enable": true,
+                "speed": 1.4,
+                "direction": "none",
+                "random": true,
+                "straight": false,
+                "out_mode": "out",
+                "bounce": false,
+                "attract": {
+                    "enable": false,
+                    "rotateX": 600,
+                    "rotateY": 1200
+                }
+            }
+        },
+        "interactivity": {
+            "detect_on": "window",
+            "events": {
+                "onhover": {
+                    "enable": true,
+                    "mode": "grab"
+                },
+                "onclick": {
+                    "enable": true,
+                    "mode": "push"
+                },
+                "resize": true
+            },
+            "modes": {
+                "grab": {
+                    "distance": 150,
+
+                    "line_linked": {
+                        "opacity": 0.3,
+                        "color": "#ffff00"
+                    }
+                },
+                "bubble": {
+                    "distance": 800,
+                    "size": 80,
+                    "duration": 2,
+                    "opacity": 0.8,
+                    "speed": 3
+                },
+                "repulse": {
+                    "distance": 50,
+                    "duration": 1
+                },
+                "push": {
+                    "particles_nb": 4
+                },
+                "remove": {
+                    "particles_nb": 2
+                }
+            }
+        },
+        "retina_detect": true
+    });
+    </script>
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-white shadow-md transition-shadow duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="/" class="text-2xl font-bold text-upc-dark flex items-center">
+                        <img src="static/aama_blue.png" alt="Applied Mathematics Student Association Logo" class="h-8 w-auto mr-3 rounded-md">
+                        <span class="hidden sm:inline">Applied Mathematics Student Association</span>
+                        <span class="inline sm:hidden text-xl font-bold">AAMA</span>
+                    </a>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="/projects" class="text-gray-600 hover:text-upc-dark transition duration-150">Projects</a>
+                    <a href="/team" class="text-gray-600 hover:text-upc-dark transition duration-150">Team</a>
+                    <a href="/sponsors" class="text-gray-600 hover:text-upc-dark transition duration-150">Sponsors</a>
+                    <a href="/contact" class="text-gray-600 hover:text-upc-dark transition duration-150">Contact</a>
+
+                </nav>
+                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-md text-gray-400 hover:text-upc-dark hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-upc-dark">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-gray-100">
+                <a href="/projects" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-upc-light">Projects</a>
+                <a href="/team" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-upc-light">Team</a>
+                <a href="/sponsors" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-upc-light">Sponsors</a>
+                <a href="/contact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-upc-light">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-8">
+<section id="hero" class="relative overflow-hidden py-20 sm:py-17 lg:py-17">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="lg:w-3/5">
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-4">
+                        Applied Maths <span class="text-upc-dark block mt-1"> Student Association</span>
+                        <span class="text-upc-blue block mt-2 text-2xl sm:text-3xl lg:text-4xl font-extrabold">at UPC - Universitat Politècnica de Catalunya (BarcelonaTech)</span>
+                    </h1>
+                    <p class="text-xl sm:text-2xl text-gray-600 mb-8">
+                        Student-run association at UPC working on bridging theoretical mathematics with real-world business challenges through dedicated, high-impact consulting projects.
+                    </p>
+                    <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
+                        <a href="mailto:appliedmathupc@gmail.com" class="inline-flex justify-center items-center px-8 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-upc-dark hover:bg-gray-900 transition duration-150 shadow-lg">
+                            Discuss a New Project
+                        </a>
+                        <a href="/contact" class="inline-flex justify-center items-center px-8 py-3 border border-upc-dark text-base font-medium rounded-lg text-upc-dark bg-white hover:bg-upc-dark hover:text-upc-cream transition duration-150 shadow-md">
+                            Join Our Team
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hidden lg:block absolute bottom-0 right-0 w-2/5 h-full opacity-10 pt-8">
+                <svg viewBox="0 0 100 100" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+                            <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#94a3b8" stroke-width="0.2" />
+                        </pattern>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#grid)" />
+                </svg>
+            </div>
+        </section>
+
+        <section id="about" class="py-10 sm:py-24 lg:py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                        Our Impact & Dedication
+                    </h2>
+                    <p class="mt-4 text-xl text-gray-600">
+                        We deliver high-fidelity analytical solutions to industry leaders.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="p-6 bg-white rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition duration-300">
+                        <div class="text-5xl font-extrabold text-upc-dark">200+</div>
+                        <p class="mt-2 text-lg font-medium text-gray-700">Hours per Project</p>
+                        <p class="mt-1 text-gray-500">Deep commitment to comprehensive solution development.</p>
+                    </div>
+
+                    <div class="p-6 bg-white rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition duration-300">
+                        <div class="text-5xl font-extrabold text-upc-dark">Finance, Tech &amp; more</div>
+                        <p class="mt-2 text-lg font-medium text-gray-700">Primary Sector Focus</p>
+                        <p class="mt-1 text-gray-500">Applying advanced mathematical methods and models where they matter most.</p>
+                    </div>
+                </div>
+
+                <div class="mt-16 text-center">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Our Methodology</h3>
+                    <p class="max-w-4xl mx-auto text-lg text-gray-600">
+                        Our groups—composed of top university students—employ a rigorous, data-driven approach, starting with problem definition, followed by model development (statistical, machine learning, or quantitative), and culminating in a comprehensive, actionable deployment strategy for our clients.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="client-contact" class="py-20 sm:py-24 lg:py-32 bg-upc-dark">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl font-extrabold text-upc-cream sm:text-4xl">
+                    Partner With Our Team!
+                </h2>
+                <p class="mt-4 text-xl text-gray-300 max-w-3xl mx-auto">
+                    Bring your challenge to our dedicated teams. We deliver actionable models and advanced analysis over a 200+ hour project commitment.
+                </p>
+                <div class="mt-10">
+                    <a href="mailto:appliedmathupc@gmail.com" class="inline-flex justify-center items-center px-10 py-4 border-4 border-upc-cream text-lg font-semibold rounded-lg text-upc-dark bg-upc-cream hover:bg-white transition duration-150 shadow-2xl transform hover:scale-105">
+                        Start a Project Discussion
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <footer id="contact" class="bg-upc-dark text-white border-t border-gray-700">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4 text-upc-cream">Applied Mathematics Student Association</h3>
+                        <p class="text-gray-400 text-sm">
+                            Dedicated to applying quantitative methods to solve real-world business problems.
+                        </p>
+                        <h4 class="mt-6 text-lg font-semibold mb-2 text-upc-cream">Affiliated with</h4>
+                        <div class="flex items-center space-x-4 mt-2">
+                            <a href="https://www.upc.edu" target="_blank"><img src="static/upc_logo.png" alt="UPC Logo" class="h-10 w-auto opacity-70"></a>
+                            <a href="https://fme.upc.edu" target="_blank"><img src="static/Logo_fme.jpg" alt="FME Logo" class="h-8 w-auto opacity-70"></a>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4 text-upc-cream">Quick Links</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="/" class="text-gray-400 hover:text-upc-cream transition duration-150">About Us</a></li>
+                            <li><a href="/projects" class="text-gray-400 hover:text-upc-cream transition duration-150">Our Projects</a></li>
+                            <li><a href="/team" class="text-gray-400 hover:text-upc-cream transition duration-150">Our Team</a></li>
+                            <li><a href="/sponsors" class="text-gray-400 hover:text-upc-cream transition duration-150">Sponsors</a></li>
+
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4 text-upc-cream">Follow Us</h3>
+                        <div class="flex space-x-4">
+                            <a href="https://www.linkedin.com/company/applied-mathematics-association" target="_blank" class="text-upc-cream hover:text-white transition duration-150">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                                    <rect x="2" y="9" width="4" height="12"/>
+                                    <circle cx="4" cy="4" r="2" fill="currentColor"/>
+                                </svg>
+                            </a>
+                            <a href="https://www.instagram.com/aama_upc" target="_blank" class="text-upc-cream hover:text-white transition duration-150">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-8 pt-8 border-t border-gray-700 text-center">
+                    <p class="text-sm text-gray-500">&copy; 2026 Applied Mathematics Student Association. All rights reserved.</p>
+                    <p class="text-sm text-gray-500 mt-2">Created by Marc Bisbal</p>
+                </div>
+            </div>
+        </footer>
+
+        <script>
+
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('navbar-scrolled');
+                    navbar.classList.remove('shadow-md');
+                } else {
+                    navbar.classList.remove('navbar-scrolled');
+                    navbar.classList.add('shadow-md');
+                }
+            });
+
+        </script>
+    </main>
+</body>
+</html>
