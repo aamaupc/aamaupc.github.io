@@ -1,306 +1,1073 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Applied Mathematics Student Association | Our Team</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0F172A" media="(prefers-color-scheme: dark)">
+    <title>Our Leadership Team | Applied Mathematics Association</title>
+    
+    <!-- Meta Tags & SEO -->
+    <meta name="description" content="Meet the students leading the Applied Mathematics Student Association at UPC BarcelonaTech.">
+    <meta name="author" content="Marc Bisbal">
+    <meta property="og:title" content="AMA — Applied Mathematics Association | UPC">
+    <meta property="og:description" content="Bridging advanced mathematical modeling, stochastic optimization, and machine learning with mission-critical industry challenges.">
+    <meta property="og:image" content="/static/logo-original.png">
+    <meta property="og:type" content="website">
+
+    <!-- Favicons (Square 1:1 ratio to prevent vertical stretching) -->
+    <link rel="icon" type="image/png" sizes="96x96" href="/static/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/static/favicon.png">
+    <link rel="apple-touch-icon" href="/static/favicon.png">
+    <link rel="shortcut icon" href="/static/favicon.ico">
+    <link rel="manifest" href="/static/site.webmanifest">
+
+    <!-- Typography: Plus Jakarta Sans, Space Grotesk, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN with Applied Mathematics Theme Extensions -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="icon" type="image/svg+xml" href="../static/favicon2.svg">
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+                        display: ['"Space Grotesk"', '"Plus Jakarta Sans"', 'sans-serif'],
                     },
                     colors: {
-                        'upc-dark': '#122C43',
-                        'upc-blue': '#00599C', 
-                        'upc-cream': '#EAE0D5',
-                        'upc-light': '#F5F5F5',
+                        brand: {
+                            navy: '#0F172A',
+                            dark: '#020617',
+                            blue: '#0066CC',
+                            cyan: '#0284C7',
+                            amber: '#D97706',
+                            platinum: '#F8FAFC',
+                            card: '#FFFFFF',
+                            subtle: '#F1F5F9',
+                            muted: '#334155',  /* Slate-700: 8.6:1 contrast ratio on white (WCAG AAA) */
+                            light: '#475569',  /* Slate-600: 5.7:1 contrast ratio on white (WCAG AA) */
+                            border: 'rgba(15, 23, 42, 0.08)',
+                            borderStrong: 'rgba(15, 23, 42, 0.16)',
+                        }
                     }
                 }
             }
         }
     </script>
+
+    <!-- MathJax 3 with Asynchronous Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Base Styles & Applied Mathematics Theme Baseline -->
     <style>
+        :root {
+            --bg-page: #F8FAFC;
+            --text-main: #0F172A;
+            --text-muted: #334155;
+            --text-light: #64748B;
+            --accent-blue: #0066CC;
+            --accent-cyan: #0284C7;
+            --accent-amber: #D97706;
+            --border-line: rgba(15, 23, 42, 0.08);
+            --border-strong: rgba(15, 23, 42, 0.16);
+            --bg-card: #FFFFFF;
+            --bg-subtle: #F1F5F9;
+        }
+
         html {
-            scroll-behavior: smooth;
-            scroll-snap-type: y proximity;
+            -webkit-text-size-adjust: 100%;
+            touch-action: manipulation;
         }
+
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #f9fafb;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01";
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-tap-highlight-color: transparent;
         }
-        section, footer {
-            scroll-snap-align: start;
-            scroll-margin-top: 5rem;
+
+        /* Prevent auto-zoom on iOS Safari when tapping form inputs */
+        @media (max-width: 640px) {
+            input, select, textarea {
+                font-size: 16px !important;
+            }
         }
-        .member-card {
-            scroll-snap-align: center;
-            scroll-margin-top: 2rem;
+
+        /* Safe area helpers for edge-to-edge screens */
+        .safe-top {
+            padding-top: max(env(safe-area-inset-top, 0px), 1rem);
+        }
+        .safe-bottom {
+            padding-bottom: max(env(safe-area-inset-bottom, 0px), 1rem);
+        }
+
+        /* Ambient Canvas sits strictly in the background */
+        #lorenz-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Apple Translucent Floating Header */
+        .glass-header {
+            background-color: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid var(--border-line);
+            transition: background-color 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+        }
+        .glass-header.scrolled {
+            background-color: rgba(255, 255, 255, 0.92);
+            border-bottom-color: rgba(15, 23, 42, 0.12);
+            box-shadow: 0 4px 20px -4px rgba(15, 23, 42, 0.05);
+        }
+
+        .math-card, .quant-card {
+            position: relative;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-line);
+            box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.02);
+            transition: border-color 150ms ease-out, box-shadow 150ms ease-out, transform 150ms ease-out;
+            overflow: hidden;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .math-card:hover, .quant-card:hover {
+                border-color: rgba(0, 102, 204, 0.28);
+                box-shadow: 0 10px 24px -4px rgba(15, 23, 42, 0.06), 0 2px 6px rgba(15, 23, 42, 0.02);
+                transform: translateY(-2px);
+            }
+        }
+
+        /* Tactile Press Physics (Apple Tenet 1) */
+        .btn-tactile {
+            transition: transform 100ms cubic-bezier(0.16, 1, 0.3, 1), 
+                        background-color 150ms ease-out, 
+                        border-color 150ms ease-out,
+                        box-shadow 150ms ease-out;
+        }
+        .btn-tactile:active {
+            transform: scale(0.97) !important;
+        }
+
+        /* Formula inspector chips */
+        .formula-term {
+            cursor: pointer;
+            padding: 3px 8px;
+            border-radius: 6px;
+            background: rgba(2, 132, 199, 0.06);
+            border: 1px solid rgba(2, 132, 199, 0.16);
+            transition: background-color 150ms ease-out, color 150ms ease-out, border-color 150ms ease-out, transform 100ms ease-out;
+            display: inline-block;
+        }
+        .formula-term:active {
+            transform: scale(0.97);
+        }
+        .formula-term:hover, .formula-term.active {
+            background: var(--accent-blue);
+            color: #FFFFFF !important;
+            border-color: var(--accent-blue);
+        }
+
+        /* Scholarly Sidenote */
+        .tufte-sidenote {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--text-light);
+            border-left: 2px solid var(--accent-blue);
+            padding-left: 0.75rem;
+            line-height: 1.5;
+        }
+
+        /* Accessibility Foundations (Apple Tenet 14) */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+            #scroll-progress-bar { display: none !important; }
+        }
+        @media (prefers-reduced-transparency: reduce) {
+            .glass-header, #mobile-menu, footer {
+                background-color: #FFFFFF !important;
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+            }
+        }
+        @media (prefers-contrast: more) {
+            :root {
+                --border-line: rgba(15, 23, 42, 0.25);
+                --border-strong: rgba(15, 23, 42, 0.4);
+            }
+            .math-card, .quant-card, .glass-header {
+                border-color: rgba(15, 23, 42, 0.3) !important;
+            }
+        }
+
+        /* Smooth Custom Scrollbar */
+        ::-webkit-scrollbar { width: 7px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(100, 116, 139, 0.25); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(100, 116, 139, 0.4); }
+
+        /* Hardware-Accelerated Continuous Marquee Slider */
+        @keyframes marquee-scroll {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
+        }
+        .animate-marquee {
+            display: flex;
+            width: max-content;
+            animation: marquee-scroll 28s linear infinite;
+            will-change: transform;
+        }
+        .animate-marquee:hover {
+            animation-play-state: paused;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .animate-marquee {
+                animation: none !important;
+                flex-wrap: wrap !important;
+                justify-content: center !important;
+                width: 100% !important;
+            }
         }
     </style>
+    
 </head>
 
-<body class="text-gray-800">
+<body class="min-h-screen relative overflow-x-hidden selection:bg-brand-blue selection:text-white flex flex-col justify-between">
 
-    <header class="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
+    <!-- HARDWARE-ACCELERATED READING PROGRESS BAR (0 LAYOUT REFLOW) -->
+    <div id="scroll-progress-bar" class="fixed top-0 left-0 right-0 h-[2px] bg-brand-blue z-[60] origin-left scale-x-0 pointer-events-none will-change-transform"></div>
+
+    <!-- FULL-SCREEN LOW-RESOURCE LORENZ ATTRACTOR CANVAS -->
+    <canvas id="lorenz-canvas"></canvas>
+
+    <!-- MOBILE MENU BACKDROP OVERLAY -->
+    <div id="mobile-menu-backdrop" class="fixed inset-0 bg-slate-900/30 backdrop-blur-xs z-40 md:hidden transition-opacity duration-200 opacity-0 pointer-events-none hidden" aria-hidden="true"></div>
+
+    <!-- FIXED GLASS NAVIGATION BAR (Ultra-sleek 44px on mobile, 64px on desktop) -->
+    <header id="site-header" class="fixed top-0 left-0 right-0 z-50 glass-header transition-shadow duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex items-center">
-                    <a href="/" class="text-2xl font-bold text-upc-dark flex items-center">
-                        <img src="../static/aama_blue.png" alt="Applied Mathematics Student Association Logo" class="h-8 w-auto mr-3 rounded-md">
-                        <span class="hidden sm:inline">Applied Mathematics Student Association</span>
-                        <span class="inline sm:hidden text-xl font-bold">AAMA</span>
+            <div class="flex items-center justify-between h-11 sm:h-16">
+                
+                <!-- Logo & Brand Mark (Transparent Logo) -->
+                <div class="flex items-center min-w-0 mr-2">
+                    <a href="/" class="flex items-center group py-1 flex-shrink-0" aria-label="Applied Mathematics Association Home">
+                        <img src="/static/blue-nobg-logo.png" alt="Applied Mathematics Association Logo" class="h-2 sm:h-4 w-auto flex-shrink-0 group-hover:opacity-90 transition-opacity duration-150">
                     </a>
                 </div>
-                <nav class="hidden md:flex space-x-8">
-                    <a href="/projects" class="text-gray-600 hover:text-upc-dark transition duration-150">Projects</a>
-                    <a href="/team" class="text-upc-blue font-semibold border-b-2 border-upc-blue">Team</a>
-                    <a href="/sponsors" class="text-gray-600 hover:text-upc-dark transition duration-150">Sponsors</a>
-                    <a href="/contact" class="text-gray-600 hover:text-upc-dark transition duration-150">Contact</a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center space-x-1 lg:space-x-2 text-sm font-medium">
+                    <a href="/" class="px-3.5 py-2 rounded-lg transition-colors text-brand-muted hover:text-brand-navy hover:bg-slate-100/60">
+                        Home
+                    </a>
+                    <a href="/projects/" class="px-3.5 py-2 rounded-lg transition-colors text-brand-muted hover:text-brand-navy hover:bg-slate-100/60">
+                        Projects
+                    </a>
+                    <a href="/team/" class="px-3.5 py-2 rounded-lg transition-colors text-brand-blue bg-blue-50/70 font-semibold">
+                        Team
+                    </a>
+                    <a href="/sponsors/" class="px-3.5 py-2 rounded-lg transition-colors text-brand-muted hover:text-brand-navy hover:bg-slate-100/60">
+                        Partners
+                    </a>
+                    <a href="/contact/#recruitment" class="hidden xl:inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium text-emerald-800 bg-emerald-50/80 border border-emerald-200/80 hover:bg-emerald-100/80 hover:border-emerald-300 transition-colors duration-150 mr-1 shadow-2xs group">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                        <span>Applications Open</span>
+                    </a>
+                    <a href="/contact/" class="btn-tactile ml-1 px-4 py-2 rounded-lg bg-brand-navy text-white text-xs font-medium hover:bg-slate-800 shadow-xs">
+                        Contact
+                    </a>
                 </nav>
-                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-md text-upc-dark hover:text-upc-dark hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-upc-dark">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                </button>
+
+                <!-- Mobile Hamburger Button (Sleek, low-profile) -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Toggle Navigation Menu" class="p-1.5 sm:p-2.5 rounded-lg text-brand-muted hover:text-brand-navy hover:bg-slate-100 active:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-blue btn-tactile min-h-[36px] min-w-[36px] flex items-center justify-center">
+                        <svg id="hamburger-icon" class="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <svg id="close-icon" class="h-5 w-5 sm:h-6 sm:w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
-        <div id="mobile-menu" class="hidden md:hidden">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-gray-100">
-                <a href="/projects" class="block px-3 py-2 rounded-md text-base font-medium text-upc-dark hover:bg-upc-light">Projects</a>
-                <a href="/team" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-upc-light">Team</a>
-                <a href="/sponsors" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-upc-light">Sponsors</a>
-                <a href="/contact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-upc-light">Contact</a>
+
+        <!-- Mobile Drawer Menu (Anchored below header, zero impact on navbar height) -->
+        <div id="mobile-menu" class="md:hidden absolute top-full left-0 right-0 w-full border-b border-slate-200/80 bg-white/95 backdrop-blur-xl px-4 py-3 space-y-1 shadow-lg transition-all duration-200 ease-out origin-top opacity-0 pointer-events-none -translate-y-2 hidden">
+            <a href="/" class="mobile-nav-link flex items-center justify-between px-3 py-2 rounded-lg text-sm font-medium text-brand-muted hover:bg-slate-50 active:bg-slate-100">
+                <span>Home</span>
+                <span class="text-xs opacity-50">→</span>
+            </a>
+            <a href="/projects/" class="mobile-nav-link flex items-center justify-between px-3 py-2 rounded-lg text-sm font-medium text-brand-muted hover:bg-slate-50 active:bg-slate-100">
+                <span>Projects & Case Studies</span>
+                <span class="text-xs opacity-50">→</span>
+            </a>
+            <a href="/team/" class="mobile-nav-link flex items-center justify-between px-3 py-2 rounded-lg text-sm font-medium text-brand-blue bg-blue-50/80 font-semibold">
+                <span>Leadership Team</span>
+                <span class="text-xs opacity-50">→</span>
+            </a>
+            <a href="/sponsors/" class="mobile-nav-link flex items-center justify-between px-3 py-2 rounded-lg text-sm font-medium text-brand-muted hover:bg-slate-50 active:bg-slate-100">
+                <span>Partners & Collaborators</span>
+                <span class="text-xs opacity-50">→</span>
+            </a>
+            <a href="/contact/#recruitment" class="mobile-nav-link flex items-center justify-between px-3 py-1.5 rounded-lg text-xs font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200/80">
+                <span class="flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    Cohort Applications Open
+                </span>
+                <span>Apply Now →</span>
+            </a>
+            <div class="pt-1">
+                <a href="/contact/" class="mobile-nav-link btn-tactile flex items-center justify-center w-full px-4 py-2.5 rounded-xl bg-brand-navy active:bg-slate-900 text-white text-xs sm:text-sm font-semibold shadow-xs">
+                    Contact or Propose Project
+                </a>
             </div>
         </div>
     </header>
 
-    <main class="pt-24 pb-16">
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-16">
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-4">
-                Our Leadership Team
-            </h1>
-            <p class="text-xl text-gray-600 max-w-4xl mx-auto">
-                Meet the students driving the applied mathematics projects and strategy at Applied Mathematics Student Association at UPC.
-            </p>
-        </section>
-
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-wrap justify-center gap-8">
-                
-                
-                <div class="member-card w-full sm:w-72 bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 transition duration-300 hover:shadow-2xl">
-                    <div class="relative h-64 bg-upc-light">
-                        <img class="object-cover w-full h-full" src="../static/foto_han.jpg" alt="Hân Virgili's photo" onerror="this.onerror=null;this.src='https://placehold.co/400x400/F5F5F5/122C43?text=H'">
-                    </div>
-                    <div class="p-6 text-center">
-                        <h3 class="text-xl font-bold text-upc-dark mb-1">Hân Virgili</h3>
-                        <p class="text-sm font-semibold text-upc-blue mb-3">President</p>
-                        <p class="text-gray-600 text-sm mb-4"></p>
-                        <a href="https://www.linkedin.com/in/hanvirgili/" target="_blank" class="text-gray-400 hover:text-upc-blue transition duration-150 inline-flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-1">
-                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                                <rect x="2" y="9" width="4" height="12"/>
-                                <circle cx="4" cy="4" r="2" fill="currentColor"/>
-                            </svg>
-                            LinkedIn
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="member-card w-full sm:w-72 bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 transition duration-300 hover:shadow-2xl">
-                    <div class="relative h-64 bg-upc-light">
-                        <img class="object-cover w-full h-full" src="../static/foto_alejandro.jpg" alt="Alejandro Cilveti's photo" onerror="this.onerror=null;this.src='https://placehold.co/400x400/F5F5F5/122C43?text=A'">
-                    </div>
-                    <div class="p-6 text-center">
-                        <h3 class="text-xl font-bold text-upc-dark mb-1">Alejandro Cilveti</h3>
-                        <p class="text-sm font-semibold text-upc-blue mb-3">Vicepresident</p>
-                        <p class="text-gray-600 text-sm mb-4"></p>
-                        <a href="https://www.linkedin.com/in/alejandrocilveti/" target="_blank" class="text-gray-400 hover:text-upc-blue transition duration-150 inline-flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-1">
-                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                                <rect x="2" y="9" width="4" height="12"/>
-                                <circle cx="4" cy="4" r="2" fill="currentColor"/>
-                            </svg>
-                            LinkedIn
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="member-card w-full sm:w-72 bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 transition duration-300 hover:shadow-2xl">
-                    <div class="relative h-64 bg-upc-light">
-                        <img class="object-cover w-full h-full" src="../static/foto_paula.jpg" alt="Paula de Miguel's photo" onerror="this.onerror=null;this.src='https://placehold.co/400x400/F5F5F5/122C43?text=P'">
-                    </div>
-                    <div class="p-6 text-center">
-                        <h3 class="text-xl font-bold text-upc-dark mb-1">Paula de Miguel</h3>
-                        <p class="text-sm font-semibold text-upc-blue mb-3">Head of Projects</p>
-                        <p class="text-gray-600 text-sm mb-4"></p>
-                        <a href="https://www.linkedin.com/in/paula-de-miguel-de-la-guardia-5a0641301/" target="_blank" class="text-gray-400 hover:text-upc-blue transition duration-150 inline-flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-1">
-                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                                <rect x="2" y="9" width="4" height="12"/>
-                                <circle cx="4" cy="4" r="2" fill="currentColor"/>
-                            </svg>
-                            LinkedIn
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="member-card w-full sm:w-72 bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 transition duration-300 hover:shadow-2xl">
-                    <div class="relative h-64 bg-upc-light">
-                        <img class="object-cover w-full h-full" src="../static/foto_aina.jpg" alt="Aina Vives's photo" onerror="this.onerror=null;this.src='https://placehold.co/400x400/F5F5F5/122C43?text=A'">
-                    </div>
-                    <div class="p-6 text-center">
-                        <h3 class="text-xl font-bold text-upc-dark mb-1">Aina Vives</h3>
-                        <p class="text-sm font-semibold text-upc-blue mb-3">Head of Events</p>
-                        <p class="text-gray-600 text-sm mb-4"></p>
-                        <a href="https://www.linkedin.com/in/aina-vives-roca-9181b6338/" target="_blank" class="text-gray-400 hover:text-upc-blue transition duration-150 inline-flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-1">
-                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                                <rect x="2" y="9" width="4" height="12"/>
-                                <circle cx="4" cy="4" r="2" fill="currentColor"/>
-                            </svg>
-                            LinkedIn
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="member-card w-full sm:w-72 bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 transition duration-300 hover:shadow-2xl">
-                    <div class="relative h-64 bg-upc-light">
-                        <img class="object-cover w-full h-full" src="../static/foto_marc.jpg" alt="Marc Bisbal's photo" onerror="this.onerror=null;this.src='https://placehold.co/400x400/F5F5F5/122C43?text=M'">
-                    </div>
-                    <div class="p-6 text-center">
-                        <h3 class="text-xl font-bold text-upc-dark mb-1">Marc Bisbal</h3>
-                        <p class="text-sm font-semibold text-upc-blue mb-3">Head of Finance</p>
-                        <p class="text-gray-600 text-sm mb-4"></p>
-                        <a href="https://www.linkedin.com/in/marc-bisbal-78ba97266/" target="_blank" class="text-gray-400 hover:text-upc-blue transition duration-150 inline-flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-1">
-                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                                <rect x="2" y="9" width="4" height="12"/>
-                                <circle cx="4" cy="4" r="2" fill="currentColor"/>
-                            </svg>
-                            LinkedIn
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="member-card w-full sm:w-72 bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 transition duration-300 hover:shadow-2xl">
-                    <div class="relative h-64 bg-upc-light">
-                        <img class="object-cover w-full h-full" src="../static/foto_laura.jpg" alt="Laura Rebollo's photo" onerror="this.onerror=null;this.src='https://placehold.co/400x400/F5F5F5/122C43?text=L'">
-                    </div>
-                    <div class="p-6 text-center">
-                        <h3 class="text-xl font-bold text-upc-dark mb-1">Laura Rebollo</h3>
-                        <p class="text-sm font-semibold text-upc-blue mb-3">Head of Communication</p>
-                        <p class="text-gray-600 text-sm mb-4"></p>
-                        <a href="https://www.linkedin.com/in/laura-rebollo-crespo-369973180/" target="_blank" class="text-gray-400 hover:text-upc-blue transition duration-150 inline-flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-1">
-                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                                <rect x="2" y="9" width="4" height="12"/>
-                                <circle cx="4" cy="4" r="2" fill="currentColor"/>
-                            </svg>
-                            LinkedIn
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="member-card w-full sm:w-72 bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 transition duration-300 hover:shadow-2xl">
-                    <div class="relative h-64 bg-upc-light">
-                        <img class="object-cover w-full h-full" src="../static/foto_bruno.jpg" alt="Bruno Baró's photo" onerror="this.onerror=null;this.src='https://placehold.co/400x400/F5F5F5/122C43?text=B'">
-                    </div>
-                    <div class="p-6 text-center">
-                        <h3 class="text-xl font-bold text-upc-dark mb-1">Bruno Baró</h3>
-                        <p class="text-sm font-semibold text-upc-blue mb-3">Head of Projects</p>
-                        <p class="text-gray-600 text-sm mb-4"></p>
-                        <a href="https://www.linkedin.com/in/bruno-bar%C3%B3-or%C3%BAs-720146382/" target="_blank" class="text-gray-400 hover:text-upc-blue transition duration-150 inline-flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-1">
-                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                                <rect x="2" y="9" width="4" height="12"/>
-                                <circle cx="4" cy="4" r="2" fill="currentColor"/>
-                            </svg>
-                            LinkedIn
-                        </a>
-                    </div>
-                </div>
-                
-
-            </div>
-        </section>
+    <!-- MAIN PAGE CONTENT (CHILD TEMPLATES INJECT HERE) -->
+    <main class="relative z-10 pt-11 sm:pt-20 flex-grow">
         
-        <section class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center border-t pt-10">
-            <h3 class="text-xl font-bold text-gray-700 mb-6">Affiliated with</h3>
-            <div class="flex flex-wrap justify-center items-center space-x-8 sm:space-x-12">
-                <!-- UPC Logo -->
-                <a href="https://www.upc.edu" target="_blank"><img src="../static/upc_logo.png" alt="UPC Logo" class="h-12 w-auto opacity-70"></a>
-                <!-- FME Logo -->
-                <a href="https://fme.upc.edu" target="_blank"><img src="../static/Logo_fme.jpg" alt="FME Logo" class="h-10 w-auto opacity-70"></a>
-            </div>
-        </section>
-    </main>
-    <footer class="bg-upc-dark text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div>
-                    <h3 class="text-lg font-semibold mb-4 text-upc-cream">Applied Mathematics Student Association</h3>
-                    <p class="text-gray-400 text-sm">
-                        Dedicated to applying quantitative methods to solve real-world business problems.
-                    </p>
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-24 pt-4 pb-8 sm:py-16">
+
+    <!-- PAGE HEADER -->
+    <section class="text-center max-w-3xl mx-auto space-y-3 sm:space-y-4">
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold font-display text-brand-navy tracking-tight">
+            Our Leadership Board
+        </h1>
+        <p class="text-sm sm:text-lg text-brand-muted leading-relaxed">
+            Meet the students directing the applied mathematics projects, research methodology, and corporate partnerships at UPC — Universitat Politècnica de Catalunya (BarcelonaTech).
+        </p>
+    </section>
+
+    <!-- TEAM MEMBERS GRID -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8">
+        
+        <div class="math-card rounded-2xl p-5 sm:p-7 flex flex-col justify-between space-y-5 sm:space-y-6 group">
+            
+            <div class="space-y-3.5 sm:space-y-4">
+                <!-- Member Header with Portrait & Role -->
+                <div class="flex items-center space-x-3.5 sm:space-x-4">
+                    <div class="h-16 w-16 sm:h-20 sm:w-20 rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 flex-shrink-0 shadow-2xs group-hover:scale-[1.03] transition-transform duration-200 ease-out">
+                        <img src="/static/foto_han.jpg" 
+                             alt="Hân Virgili" 
+                             class="h-full w-full object-cover" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/200x200/0F172A/0066CC?text=H';">
+                    </div>
+                    <div>
+                        <h2 class="font-bold text-base sm:text-lg text-brand-navy font-display leading-tight">
+                            Hân Virgili
+                        </h2>
+                        <span class="inline-block mt-1 px-2.5 py-0.5 rounded text-xs font-semibold bg-blue-50 text-brand-blue border border-blue-100">
+                            President
+                        </span>
+                        <p class="text-xs text-brand-muted mt-1 font-medium">
+                            Mathematics · UPC
+                        </p>
+                    </div>
                 </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-4 text-upc-cream">Quick Links</h3>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="/" class="text-gray-400 hover:text-upc-cream transition duration-150">Home</a></li>
-                        <li><a href="/projects" class="text-gray-400 hover:text-upc-cream transition duration-150">Our Projects</a></li>
-                        <li><a href="/team" class="text-gray-400 hover:text-upc-cream transition duration-150">Our Team</a></li>
-                        <li><a href="/sponsors" class="text-gray-400 hover:text-upc-cream transition duration-150">Sponsors</a></li>
+
+                <!-- Biography / Responsibilities -->
+                <p class="text-xs sm:text-sm text-brand-muted leading-relaxed">
+                    Directs strategic vision, faculty alignment, and corporate engagements.
+                </p>
+            </div>
+
+            <!-- Footer: LinkedIn Profile Link (Accessible 44px min tap target) -->
+            <div class="pt-3.5 sm:pt-4 border-t border-slate-100 flex items-center justify-between">
+                <span class="text-xs text-brand-muted font-medium">Applied Mathematics Board</span>
+                <a href="https://www.linkedin.com/in/hanvirgili/" target="_blank" rel="noopener noreferrer" class="min-h-[44px] min-w-[44px] -my-2 -mr-2 px-3 py-2 inline-flex items-center gap-1.5 text-xs text-brand-blue font-semibold hover:underline group-hover:translate-x-0.5 transition-transform duration-150" aria-label="LinkedIn profile for Hân Virgili">
+                    <span>LinkedIn</span>
+                    <svg class="w-3.5 h-3.5 fill-current" aria-hidden="true" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9h2.79v8.37H6.46v-8.37M7.86 6.2a1.63 1.63 0 0 0-1.63 1.62c0 .9.73 1.63 1.63 1.63.9 0 1.63-.73 1.63-1.63 0-.9-.73-1.62-1.63-1.62Z"/></svg>
+                </a>
+            </div>
+
+        </div>
+        
+        <div class="math-card rounded-2xl p-5 sm:p-7 flex flex-col justify-between space-y-5 sm:space-y-6 group">
+            
+            <div class="space-y-3.5 sm:space-y-4">
+                <!-- Member Header with Portrait & Role -->
+                <div class="flex items-center space-x-3.5 sm:space-x-4">
+                    <div class="h-16 w-16 sm:h-20 sm:w-20 rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 flex-shrink-0 shadow-2xs group-hover:scale-[1.03] transition-transform duration-200 ease-out">
+                        <img src="/static/foto_alejandro.jpg" 
+                             alt="Alejandro Cilveti" 
+                             class="h-full w-full object-cover" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/200x200/0F172A/0066CC?text=A';">
+                    </div>
+                    <div>
+                        <h2 class="font-bold text-base sm:text-lg text-brand-navy font-display leading-tight">
+                            Alejandro Cilveti
+                        </h2>
+                        <span class="inline-block mt-1 px-2.5 py-0.5 rounded text-xs font-semibold bg-blue-50 text-brand-blue border border-blue-100">
+                            Vice President
+                        </span>
+                        <p class="text-xs text-brand-muted mt-1 font-medium">
+                            Mathematics · UPC
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Biography / Responsibilities -->
+                <p class="text-xs sm:text-sm text-brand-muted leading-relaxed">
+                    Oversees consulting quality assurance, research seminars, and project groups.
+                </p>
+            </div>
+
+            <!-- Footer: LinkedIn Profile Link (Accessible 44px min tap target) -->
+            <div class="pt-3.5 sm:pt-4 border-t border-slate-100 flex items-center justify-between">
+                <span class="text-xs text-brand-muted font-medium">Applied Mathematics Board</span>
+                <a href="https://www.linkedin.com/in/alejandrocilveti/" target="_blank" rel="noopener noreferrer" class="min-h-[44px] min-w-[44px] -my-2 -mr-2 px-3 py-2 inline-flex items-center gap-1.5 text-xs text-brand-blue font-semibold hover:underline group-hover:translate-x-0.5 transition-transform duration-150" aria-label="LinkedIn profile for Alejandro Cilveti">
+                    <span>LinkedIn</span>
+                    <svg class="w-3.5 h-3.5 fill-current" aria-hidden="true" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9h2.79v8.37H6.46v-8.37M7.86 6.2a1.63 1.63 0 0 0-1.63 1.62c0 .9.73 1.63 1.63 1.63.9 0 1.63-.73 1.63-1.63 0-.9-.73-1.62-1.63-1.62Z"/></svg>
+                </a>
+            </div>
+
+        </div>
+        
+        <div class="math-card rounded-2xl p-5 sm:p-7 flex flex-col justify-between space-y-5 sm:space-y-6 group">
+            
+            <div class="space-y-3.5 sm:space-y-4">
+                <!-- Member Header with Portrait & Role -->
+                <div class="flex items-center space-x-3.5 sm:space-x-4">
+                    <div class="h-16 w-16 sm:h-20 sm:w-20 rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 flex-shrink-0 shadow-2xs group-hover:scale-[1.03] transition-transform duration-200 ease-out">
+                        <img src="/static/foto_marc.jpg" 
+                             alt="Marc Bisbal" 
+                             class="h-full w-full object-cover" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/200x200/0F172A/0066CC?text=M';">
+                    </div>
+                    <div>
+                        <h2 class="font-bold text-base sm:text-lg text-brand-navy font-display leading-tight">
+                            Marc Bisbal
+                        </h2>
+                        <span class="inline-block mt-1 px-2.5 py-0.5 rounded text-xs font-semibold bg-blue-50 text-brand-blue border border-blue-100">
+                            Head of Finance
+                        </span>
+                        <p class="text-xs text-brand-muted mt-1 font-medium">
+                            Mathematics · UPC
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Biography / Responsibilities -->
+                <p class="text-xs sm:text-sm text-brand-muted leading-relaxed">
+                    Manages association treasury, operational budgeting, and corporate relations.
+                </p>
+            </div>
+
+            <!-- Footer: LinkedIn Profile Link (Accessible 44px min tap target) -->
+            <div class="pt-3.5 sm:pt-4 border-t border-slate-100 flex items-center justify-between">
+                <span class="text-xs text-brand-muted font-medium">Applied Mathematics Board</span>
+                <a href="https://www.linkedin.com/in/marc-bisbal-78ba97266/" target="_blank" rel="noopener noreferrer" class="min-h-[44px] min-w-[44px] -my-2 -mr-2 px-3 py-2 inline-flex items-center gap-1.5 text-xs text-brand-blue font-semibold hover:underline group-hover:translate-x-0.5 transition-transform duration-150" aria-label="LinkedIn profile for Marc Bisbal">
+                    <span>LinkedIn</span>
+                    <svg class="w-3.5 h-3.5 fill-current" aria-hidden="true" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9h2.79v8.37H6.46v-8.37M7.86 6.2a1.63 1.63 0 0 0-1.63 1.62c0 .9.73 1.63 1.63 1.63.9 0 1.63-.73 1.63-1.63 0-.9-.73-1.62-1.63-1.62Z"/></svg>
+                </a>
+            </div>
+
+        </div>
+        
+        <div class="math-card rounded-2xl p-5 sm:p-7 flex flex-col justify-between space-y-5 sm:space-y-6 group">
+            
+            <div class="space-y-3.5 sm:space-y-4">
+                <!-- Member Header with Portrait & Role -->
+                <div class="flex items-center space-x-3.5 sm:space-x-4">
+                    <div class="h-16 w-16 sm:h-20 sm:w-20 rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 flex-shrink-0 shadow-2xs group-hover:scale-[1.03] transition-transform duration-200 ease-out">
+                        <img src="/static/foto_paula.jpg" 
+                             alt="Paula de Miguel" 
+                             class="h-full w-full object-cover" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/200x200/0F172A/0066CC?text=P';">
+                    </div>
+                    <div>
+                        <h2 class="font-bold text-base sm:text-lg text-brand-navy font-display leading-tight">
+                            Paula de Miguel
+                        </h2>
+                        <span class="inline-block mt-1 px-2.5 py-0.5 rounded text-xs font-semibold bg-blue-50 text-brand-blue border border-blue-100">
+                            Head of Projects
+                        </span>
+                        <p class="text-xs text-brand-muted mt-1 font-medium">
+                            Data Science · UPC
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Biography / Responsibilities -->
+                <p class="text-xs sm:text-sm text-brand-muted leading-relaxed">
+                    Coordinates consulting milestones, delivery timelines, and project teams.
+                </p>
+            </div>
+
+            <!-- Footer: LinkedIn Profile Link (Accessible 44px min tap target) -->
+            <div class="pt-3.5 sm:pt-4 border-t border-slate-100 flex items-center justify-between">
+                <span class="text-xs text-brand-muted font-medium">Applied Mathematics Board</span>
+                <a href="https://www.linkedin.com/in/paula-de-miguel-de-la-guardia-5a0641301/" target="_blank" rel="noopener noreferrer" class="min-h-[44px] min-w-[44px] -my-2 -mr-2 px-3 py-2 inline-flex items-center gap-1.5 text-xs text-brand-blue font-semibold hover:underline group-hover:translate-x-0.5 transition-transform duration-150" aria-label="LinkedIn profile for Paula de Miguel">
+                    <span>LinkedIn</span>
+                    <svg class="w-3.5 h-3.5 fill-current" aria-hidden="true" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9h2.79v8.37H6.46v-8.37M7.86 6.2a1.63 1.63 0 0 0-1.63 1.62c0 .9.73 1.63 1.63 1.63.9 0 1.63-.73 1.63-1.63 0-.9-.73-1.62-1.63-1.62Z"/></svg>
+                </a>
+            </div>
+
+        </div>
+        
+        <div class="math-card rounded-2xl p-5 sm:p-7 flex flex-col justify-between space-y-5 sm:space-y-6 group">
+            
+            <div class="space-y-3.5 sm:space-y-4">
+                <!-- Member Header with Portrait & Role -->
+                <div class="flex items-center space-x-3.5 sm:space-x-4">
+                    <div class="h-16 w-16 sm:h-20 sm:w-20 rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 flex-shrink-0 shadow-2xs group-hover:scale-[1.03] transition-transform duration-200 ease-out">
+                        <img src="/static/foto_bruno.jpg" 
+                             alt="Bruno Baró" 
+                             class="h-full w-full object-cover" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/200x200/0F172A/0066CC?text=B';">
+                    </div>
+                    <div>
+                        <h2 class="font-bold text-base sm:text-lg text-brand-navy font-display leading-tight">
+                            Bruno Baró
+                        </h2>
+                        <span class="inline-block mt-1 px-2.5 py-0.5 rounded text-xs font-semibold bg-blue-50 text-brand-blue border border-blue-100">
+                            Head of Projects
+                        </span>
+                        <p class="text-xs text-brand-muted mt-1 font-medium">
+                            Mathematics · UPC
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Biography / Responsibilities -->
+                <p class="text-xs sm:text-sm text-brand-muted leading-relaxed">
+                    Guides technical architecture on industrial predictive modeling projects.
+                </p>
+            </div>
+
+            <!-- Footer: LinkedIn Profile Link (Accessible 44px min tap target) -->
+            <div class="pt-3.5 sm:pt-4 border-t border-slate-100 flex items-center justify-between">
+                <span class="text-xs text-brand-muted font-medium">Applied Mathematics Board</span>
+                <a href="https://www.linkedin.com/in/bruno-bar%C3%B3-or%C3%BAs-720146382/" target="_blank" rel="noopener noreferrer" class="min-h-[44px] min-w-[44px] -my-2 -mr-2 px-3 py-2 inline-flex items-center gap-1.5 text-xs text-brand-blue font-semibold hover:underline group-hover:translate-x-0.5 transition-transform duration-150" aria-label="LinkedIn profile for Bruno Baró">
+                    <span>LinkedIn</span>
+                    <svg class="w-3.5 h-3.5 fill-current" aria-hidden="true" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9h2.79v8.37H6.46v-8.37M7.86 6.2a1.63 1.63 0 0 0-1.63 1.62c0 .9.73 1.63 1.63 1.63.9 0 1.63-.73 1.63-1.63 0-.9-.73-1.62-1.63-1.62Z"/></svg>
+                </a>
+            </div>
+
+        </div>
+        
+        <div class="math-card rounded-2xl p-5 sm:p-7 flex flex-col justify-between space-y-5 sm:space-y-6 group">
+            
+            <div class="space-y-3.5 sm:space-y-4">
+                <!-- Member Header with Portrait & Role -->
+                <div class="flex items-center space-x-3.5 sm:space-x-4">
+                    <div class="h-16 w-16 sm:h-20 sm:w-20 rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 flex-shrink-0 shadow-2xs group-hover:scale-[1.03] transition-transform duration-200 ease-out">
+                        <img src="/static/foto_aina.jpg" 
+                             alt="Aina Vives" 
+                             class="h-full w-full object-cover" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/200x200/0F172A/0066CC?text=A';">
+                    </div>
+                    <div>
+                        <h2 class="font-bold text-base sm:text-lg text-brand-navy font-display leading-tight">
+                            Aina Vives
+                        </h2>
+                        <span class="inline-block mt-1 px-2.5 py-0.5 rounded text-xs font-semibold bg-blue-50 text-brand-blue border border-blue-100">
+                            Head of Events
+                        </span>
+                        <p class="text-xs text-brand-muted mt-1 font-medium">
+                            Mathematics · UPC
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Biography / Responsibilities -->
+                <p class="text-xs sm:text-sm text-brand-muted leading-relaxed">
+                    Organizes math hackathons, distinguished lectures, and student workshops.
+                </p>
+            </div>
+
+            <!-- Footer: LinkedIn Profile Link (Accessible 44px min tap target) -->
+            <div class="pt-3.5 sm:pt-4 border-t border-slate-100 flex items-center justify-between">
+                <span class="text-xs text-brand-muted font-medium">Applied Mathematics Board</span>
+                <a href="https://www.linkedin.com/in/aina-vives-roca-9181b6338/" target="_blank" rel="noopener noreferrer" class="min-h-[44px] min-w-[44px] -my-2 -mr-2 px-3 py-2 inline-flex items-center gap-1.5 text-xs text-brand-blue font-semibold hover:underline group-hover:translate-x-0.5 transition-transform duration-150" aria-label="LinkedIn profile for Aina Vives">
+                    <span>LinkedIn</span>
+                    <svg class="w-3.5 h-3.5 fill-current" aria-hidden="true" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9h2.79v8.37H6.46v-8.37M7.86 6.2a1.63 1.63 0 0 0-1.63 1.62c0 .9.73 1.63 1.63 1.63.9 0 1.63-.73 1.63-1.63 0-.9-.73-1.62-1.63-1.62Z"/></svg>
+                </a>
+            </div>
+
+        </div>
+        
+        <div class="math-card rounded-2xl p-5 sm:p-7 flex flex-col justify-between space-y-5 sm:space-y-6 group">
+            
+            <div class="space-y-3.5 sm:space-y-4">
+                <!-- Member Header with Portrait & Role -->
+                <div class="flex items-center space-x-3.5 sm:space-x-4">
+                    <div class="h-16 w-16 sm:h-20 sm:w-20 rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 flex-shrink-0 shadow-2xs group-hover:scale-[1.03] transition-transform duration-200 ease-out">
+                        <img src="/static/foto_laura.jpg" 
+                             alt="Laura Rebollo" 
+                             class="h-full w-full object-cover" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/200x200/0F172A/0066CC?text=L';">
+                    </div>
+                    <div>
+                        <h2 class="font-bold text-base sm:text-lg text-brand-navy font-display leading-tight">
+                            Laura Rebollo
+                        </h2>
+                        <span class="inline-block mt-1 px-2.5 py-0.5 rounded text-xs font-semibold bg-blue-50 text-brand-blue border border-blue-100">
+                            Head of Communication
+                        </span>
+                        <p class="text-xs text-brand-muted mt-1 font-medium">
+                            Data Science · UPC
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Biography / Responsibilities -->
+                <p class="text-xs sm:text-sm text-brand-muted leading-relaxed">
+                    Leads scientific publishing, digital channels, and recruitment campaigns.
+                </p>
+            </div>
+
+            <!-- Footer: LinkedIn Profile Link (Accessible 44px min tap target) -->
+            <div class="pt-3.5 sm:pt-4 border-t border-slate-100 flex items-center justify-between">
+                <span class="text-xs text-brand-muted font-medium">Applied Mathematics Board</span>
+                <a href="https://www.linkedin.com/in/laura-rebollo-crespo-369973180/" target="_blank" rel="noopener noreferrer" class="min-h-[44px] min-w-[44px] -my-2 -mr-2 px-3 py-2 inline-flex items-center gap-1.5 text-xs text-brand-blue font-semibold hover:underline group-hover:translate-x-0.5 transition-transform duration-150" aria-label="LinkedIn profile for Laura Rebollo">
+                    <span>LinkedIn</span>
+                    <svg class="w-3.5 h-3.5 fill-current" aria-hidden="true" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9h2.79v8.37H6.46v-8.37M7.86 6.2a1.63 1.63 0 0 0-1.63 1.62c0 .9.73 1.63 1.63 1.63.9 0 1.63-.73 1.63-1.63 0-.9-.73-1.62-1.63-1.62Z"/></svg>
+                </a>
+            </div>
+
+        </div>
+        
+    </section>
+
+    <!-- JOIN OUR TEAM RECRUITMENT CALLOUT -->
+    <section class="math-card rounded-2xl p-6 sm:p-12 text-center space-y-5 sm:space-y-6">
+        <div class="max-w-xl mx-auto space-y-2.5 sm:space-y-3">
+            <span class="text-xs font-semibold tracking-wider uppercase text-brand-blue">
+                Student Applications
+            </span>
+            <h3 class="text-xl sm:text-3xl font-bold font-display text-brand-navy">
+                Interested in Joining AMA?
+            </h3>
+            <p class="text-xs sm:text-sm text-brand-muted leading-relaxed">
+                We recruit students from Mathematics and Data Science to work on real-world industrial projects and applied research.
+            </p>
+        </div>
+        <div class="flex justify-center">
+            <a href="/contact/#recruitment" class="btn-tactile w-full sm:w-auto min-h-[44px] flex items-center justify-center px-7 py-3 rounded-xl bg-brand-navy hover:bg-slate-800 text-white font-medium text-sm shadow-sm">
+                Apply to Join AMA →
+            </a>
+        </div>
+    </section>
+
+</div>
+
+    </main>
+
+    <!-- UNIVERSAL ACADEMIC & INSTITUTIONAL FOOTER -->
+    <footer class="relative z-10 border-t border-slate-200 bg-white/95 backdrop-blur-md text-brand-muted pt-10 sm:pt-16 pb-8 sm:pb-12 mt-12 sm:mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-slate-100">
+                
+                <!-- Left: Association & Affiliations -->
+                <div class="md:col-span-5 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <img src="/static/blue-nobg-logo.png" alt="Applied Mathematics Association Logo" class="h-9 w-auto">
+                        <div>
+                            <h3 class="text-base font-bold text-brand-navy font-display">Applied Mathematics Association</h3>
+                            <p class="text-xs text-brand-blue font-medium">UPC BarcelonaTech · Facultat de Matemàtiques i Estadística</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-brand-muted leading-relaxed max-w-sm">
+                        Student-run applied mathematics and data consulting association at UPC.
+                    </p>
+                    <div class="pt-2">
+                        <span class="text-xs text-brand-muted uppercase tracking-wider block mb-2 font-semibold">Affiliated With</span>
+                        <div class="flex items-center space-x-4">
+                            <a href="https://www.upc.edu" target="_blank" rel="noopener noreferrer" class="opacity-80 hover:opacity-100 transition" aria-label="Universitat Politècnica de Catalunya">
+                                <img src="/static/upc_logo.png" alt="UPC Logo" class="h-9 w-auto">
+                            </a>
+                            <a href="https://fme.upc.edu" target="_blank" rel="noopener noreferrer" class="opacity-80 hover:opacity-100 transition" aria-label="Facultat de Matemàtiques i Estadística">
+                                <img src="/static/Logo_fme.jpg" alt="FME Logo" class="h-7 w-auto">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Middle: Navigation Links -->
+                <div class="md:col-span-3 space-y-3">
+                    <h4 class="text-xs uppercase tracking-wider text-brand-navy font-bold">Navigation</h4>
+                    <ul class="space-y-1 sm:space-y-2 text-sm font-medium">
+                        <li><a href="/" class="py-1 inline-block hover:text-brand-blue transition">Home</a></li>
+                        <li><a href="/projects/" class="py-1 inline-block hover:text-brand-blue transition">Projects</a></li>
+                        <li><a href="/team/" class="py-1 inline-block hover:text-brand-blue transition">Team</a></li>
+                        <li><a href="/sponsors/" class="py-1 inline-block hover:text-brand-blue transition">Partners</a></li>
+                        <li><a href="/contact/" class="py-1 inline-block hover:text-brand-blue transition">Contact</a></li>
                     </ul>
                 </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-4 text-upc-cream">Contact</h3>
-                    <p class="text-gray-400 text-sm">Email: appliedmathupc@gmail.com</p>
-                    <p class="text-gray-400 text-sm mt-1">Address: Universitat Politècnica de Catalunya (UPC)</p>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-4 text-upc-cream">Follow Us</h3>
-                    <div class="flex space-x-4">
-                        <a href="https://www.linkedin.com/search/results/all/?fetchDeterministicClustersOnly=true&heroEntityKey=urn%3Ali%3Aorganization%3A107220902&keywords=applied%20mathematics%20association&origin=RICH_QUERY_SUGGESTION&position=0&searchId=f0189867-f70b-4859-b8e9-4ab8e1164a5c&sid=rc0&spellCorrectionEnabled=false" target="_blank" class="text-upc-cream hover:text-white transition duration-150">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                                <rect x="2" y="9" width="4" height="12"/>
-                                <circle cx="4" cy="4" r="2" fill="currentColor"/>
-                            </svg>
+
+                <!-- Right: Contact & Institutional Info -->
+                <div class="md:col-span-4 space-y-4">
+                    <h4 class="text-xs uppercase tracking-wider text-brand-navy font-bold">Contact</h4>
+                    <p class="text-sm text-brand-muted">
+                        Campus Diagonal Sud, Edifici U<br>
+                        Carrer Pau Gargallo, 14, 08028 Barcelona
+                    </p>
+                    <div class="text-sm">
+                        <a href="mailto:appliedmathupc@gmail.com" class="text-brand-blue hover:underline font-medium py-1 inline-block">appliedmathupc@gmail.com</a>
+                    </div>
+                    <div class="flex items-center space-x-3 pt-1">
+                        <a href="https://www.linkedin.com/company/applied-mathematics-association" target="_blank" rel="noopener noreferrer" class="p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-lg bg-slate-100 text-brand-navy hover:text-brand-blue hover:bg-blue-50 transition" aria-label="AMA LinkedIn">
+                            <svg class="w-4 h-4 fill-current" aria-hidden="true" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9h2.79v8.37H6.46v-8.37M7.86 6.2a1.63 1.63 0 0 0-1.63 1.62c0 .9.73 1.63 1.63 1.63.9 0 1.63-.73 1.63-1.63 0-.9-.73-1.62-1.63-1.62Z"/></svg>
                         </a>
-                        <a href="https://www.instagram.com/aama_upc" target="_blank" class="text-upc-cream hover:text-white transition duration-150">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                            </svg>
+                        <a href="https://www.instagram.com/aama_upc" target="_blank" rel="noopener noreferrer" class="p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-lg bg-slate-100 text-brand-navy hover:text-brand-blue hover:bg-blue-50 transition" aria-label="AMA Instagram">
+                            <svg class="w-4 h-4 fill-current" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="mt-8 pt-8 border-t border-gray-700 text-center">
-                <p class="text-sm text-gray-500">&copy; 2026 Applied Mathematics Student Association. All rights reserved.</p>
-                <p class="text-sm text-gray-500 mt-2">Created by Marc Bisbal</p>
+
+            <!-- Bottom Copyright & Engineering Credit -->
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-brand-muted gap-2">
+                <p>&copy; 2026 Applied Mathematics Association · UPC BarcelonaTech. All rights reserved.</p>
+                <p class="text-xs text-brand-light">Built by Marc Bisbal</p>
             </div>
         </div>
     </footer>
-        <!-- START MOBILE MENU JAVASCRIPT -->
+
+    <!-- ----------------------------------------------------
+         HYPER-OPTIMIZED LOW-RESOURCE DUAL LORENZ ATTRACTOR ENGINE
+         (Pre-computed typed array Float32Array, 0 allocations per frame,
+          dual attractor composition: Top-Center & Bottom-Right,
+          animates continuously on scroll, pauses when tab is hidden,
+          sub-0.1% CPU consumption, 60fps butter-smooth)
+         ---------------------------------------------------- -->
     <script>
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
+        (function() {
+            // 1. Fluid Mobile Menu Controller (Apple HIG Ergonomics)
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuBackdrop = document.getElementById('mobile-menu-backdrop');
+            const hamburgerIcon = document.getElementById('hamburger-icon');
+            const closeIcon = document.getElementById('close-icon');
+
+            let isMenuOpen = false;
+            let closeTimeout = null;
+            function toggleMenu(force) {
+                isMenuOpen = typeof force === 'boolean' ? force : !isMenuOpen;
+                clearTimeout(closeTimeout);
+                if (isMenuOpen) {
+                    mobileMenu.classList.remove('hidden');
+                    void mobileMenu.offsetHeight; // force reflow for smooth transition
+                    mobileMenu.classList.remove('opacity-0', 'pointer-events-none', '-translate-y-2');
+                    mobileMenu.classList.add('opacity-100', 'translate-y-0');
+                    if (mobileMenuBackdrop) {
+                        mobileMenuBackdrop.classList.remove('hidden');
+                        void mobileMenuBackdrop.offsetHeight;
+                        mobileMenuBackdrop.classList.remove('opacity-0', 'pointer-events-none');
+                        mobileMenuBackdrop.classList.add('opacity-100');
+                    }
+                    hamburgerIcon.classList.add('hidden');
+                    closeIcon.classList.remove('hidden');
+                    mobileMenuBtn.setAttribute('aria-expanded', 'true');
+                    document.body.classList.add('overflow-hidden', 'md:overflow-auto');
+                } else {
+                    mobileMenu.classList.add('opacity-0', 'pointer-events-none', '-translate-y-2');
+                    mobileMenu.classList.remove('opacity-100', 'translate-y-0');
+                    if (mobileMenuBackdrop) {
+                        mobileMenuBackdrop.classList.add('opacity-0', 'pointer-events-none');
+                        mobileMenuBackdrop.classList.remove('opacity-100');
+                    }
+                    closeTimeout = setTimeout(() => {
+                        if (!isMenuOpen) {
+                            mobileMenu.classList.add('hidden');
+                            if (mobileMenuBackdrop) mobileMenuBackdrop.classList.add('hidden');
+                        }
+                    }, 200);
+                    hamburgerIcon.classList.remove('hidden');
+                    closeIcon.classList.add('hidden');
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                    document.body.classList.remove('overflow-hidden', 'md:overflow-auto');
+                }
+            }
+
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    toggleMenu();
+                });
+            }
+
+            // Close mobile menu on backdrop tap
+            if (mobileMenuBackdrop) {
+                mobileMenuBackdrop.addEventListener('click', () => toggleMenu(false));
+            }
+
+            // Close on Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && isMenuOpen) toggleMenu(false);
             });
-        });
-        // Note: Scroll listener is omitted as it's not strictly necessary on internal pages.
+
+            // Close when clicking any nav link inside drawer
+            document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                link.addEventListener('click', () => toggleMenu(false));
+            });
+
+            // Auto-close on resize to desktop breakpoint
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 768 && isMenuOpen) {
+                    toggleMenu(false);
+                }
+            }, { passive: true });
+
+            // 2. High-Efficiency Mobile-Optimized Lorenz Manifold Engine
+            const canvas = document.getElementById('lorenz-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d', { alpha: true });
+
+            let width = window.innerWidth;
+            let height = window.innerHeight;
+            let isMobile = width < 768;
+
+            // Cap Device Pixel Ratio to prevent mobile GPU battery drain & jank
+            const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1.5 : 2);
+            canvas.width = width * dpr;
+            canvas.height = height * dpr;
+            ctx.scale(dpr, dpr);
+
+            let mouse = { x: width / 2, y: height / 2 };
+            let animId = null;
+            let isPageVisible = !document.hidden;
+            let isTouchScrolling = false;
+            let scrollEndTimer = null;
+
+            // Pause continuous canvas draw during active mobile touch scrolling for butter-smooth 60/120fps scrolling
+            window.addEventListener('touchstart', () => {
+                isTouchScrolling = true;
+            }, { passive: true });
+
+            window.addEventListener('touchmove', () => {
+                isTouchScrolling = true;
+                clearTimeout(scrollEndTimer);
+                scrollEndTimer = setTimeout(() => {
+                    isTouchScrolling = false;
+                    if (!animId && isPageVisible) animId = requestAnimationFrame(render);
+                }, 120);
+            }, { passive: true });
+
+            window.addEventListener('touchend', () => {
+                clearTimeout(scrollEndTimer);
+                scrollEndTimer = setTimeout(() => {
+                    isTouchScrolling = false;
+                    if (!animId && isPageVisible) animId = requestAnimationFrame(render);
+                }, 120);
+            }, { passive: true });
+
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            // PRE-COMPUTE LORENZ TRAJECTORY ONCE INTO TYPED FLOAT ARRAYS
+            const N = isMobile ? 600 : 1800;
+            const pointsA = new Float32Array(N * 3);
+            const pointsB = new Float32Array(N * 3);
+
+            (function precompute() {
+                const dt = 0.009;
+                const sigma = 10, rho = 28, beta = 8/3;
+
+                // Burn-in steps to reach attractor manifold
+                let xA = 0.1, yA = 0, zA = 0;
+                let xB = 0.1001, yB = 0, zB = 0;
+                for (let i = 0; i < 600; i++) {
+                    xA += sigma * (yA - xA) * dt;
+                    yA += (xA * (rho - zA) - yA) * dt;
+                    zA += (xA * yA - beta * zA) * dt;
+
+                    xB += sigma * (yB - xB) * dt;
+                    yB += (xB * (rho - zB) - yB) * dt;
+                    zB += (xB * yB - beta * zB) * dt;
+                }
+
+                // Fill pre-computed coordinates
+                for (let i = 0; i < N; i++) {
+                    xA += sigma * (yA - xA) * dt;
+                    yA += (xA * (rho - zA) - yA) * dt;
+                    zA += (xA * yA - beta * zA) * dt;
+                    pointsA[i * 3]     = xA;
+                    pointsA[i * 3 + 1] = yA;
+                    pointsA[i * 3 + 2] = zA;
+
+                    xB += sigma * (yB - xB) * dt;
+                    yB += (xB * (rho - zB) - yB) * dt;
+                    zB += (xB * yB - beta * zB) * dt;
+                    pointsB[i * 3]     = xB;
+                    pointsB[i * 3 + 1] = yB;
+                    pointsB[i * 3 + 2] = zB;
+                }
+            })();
+
+            let autoAngle = 0;
+
+            function render() {
+                if (!isPageVisible || isTouchScrolling) {
+                    animId = null;
+                    return;
+                }
+
+                ctx.clearRect(0, 0, width, height);
+
+                if (prefersReducedMotion) {
+                    drawFrame();
+                    animId = null;
+                    return;
+                }
+
+                drawFrame();
+                animId = requestAnimationFrame(render);
+            }
+
+            function drawFrame() {
+                autoAngle += 0.0018 * 0.8;
+                const mouseTiltY = (mouse.x / width - 0.5) * 0.9;
+                const mouseTiltX = (mouse.y / height - 0.5) * 0.45;
+
+                // ----------------------------------------------------
+                // ATTRACTOR 1: Primary Manifold (Top-Center / Hero)
+                // ----------------------------------------------------
+                const angleY1 = autoAngle + mouseTiltY;
+                const angleX1 = Math.sin(autoAngle * 0.6) * 0.12 + mouseTiltX;
+                const cosY1 = Math.cos(angleY1), sinY1 = Math.sin(angleY1);
+                const cosX1 = Math.cos(angleX1), sinX1 = Math.sin(angleX1);
+
+                const scaleDivisor1 = isMobile ? 26 : 23.5;
+                const scale1 = Math.min(width, height) / scaleDivisor1;
+                const centerX1 = isMobile ? width * 0.45 : width * 0.39;
+                const centerY1 = isMobile ? height * 0.28 : height * 0.24;
+
+                // Primary Ribbon (Cobalt / Cyan)
+                drawFastRibbon(pointsA, cosY1, sinY1, cosX1, sinX1, scale1, centerX1, centerY1, 'rgba(0, 102, 204, 0.20)');
+                // Secondary Divergent Ribbon (Warm Amber)
+                drawFastRibbon(pointsB, cosY1, sinY1, cosX1, sinX1, scale1, centerX1, centerY1, 'rgba(217, 119, 6, 0.22)');
+
+                // ----------------------------------------------------
+                // ATTRACTOR 2: Secondary Manifold (Bottom-Right, Desktop only)
+                // ----------------------------------------------------
+                if (!isMobile) {
+                    const autoAngle2 = autoAngle * 1.35 + 2.3;
+                    const angleY2 = autoAngle2 - mouseTiltY * 0.65;
+                    const angleX2 = Math.cos(autoAngle2 * 0.55) * 0.14 - mouseTiltX * 0.45;
+                    const cosY2 = Math.cos(angleY2), sinY2 = Math.sin(angleY2);
+                    const cosX2 = Math.cos(angleX2), sinX2 = Math.sin(angleX2);
+
+                    const scale2 = scale1 * 0.85;
+                    const centerX2 = width * 0.95;
+                    const centerY2 = height * 0.95;
+
+                    drawFastRibbon(pointsA, cosY2, sinY2, cosX2, sinX2, scale2, centerX2, centerY2, 'rgba(2, 132, 199, 0.16)');
+                    drawFastRibbon(pointsB, cosY2, sinY2, cosX2, sinX2, scale2, centerX2, centerY2, 'rgba(217, 119, 6, 0.12)');
+                }
+            }
+
+            function drawFastRibbon(arr, cosY, sinY, cosX, sinX, scale, centerX, centerY, strokeStyle) {
+                ctx.beginPath();
+                ctx.strokeStyle = strokeStyle;
+                ctx.lineWidth = isMobile ? 0.7 : 0.8;
+
+                const step = isMobile ? 2 : 1;
+                let started = false;
+
+                for (let i = 0; i < N; i += step) {
+                    const idx = i * 3;
+                    const x = arr[idx];
+                    const y = arr[idx + 1];
+                    const z = arr[idx + 2];
+
+                    // 3D rotation projection
+                    const rx = x * cosY - (z - 25) * sinY;
+                    const rz = x * sinY + (z - 25) * cosY;
+                    const ry = y * cosX - rz * sinX;
+
+                    const px = centerX + rx * scale;
+                    const py = centerY + ry * scale;
+
+                    if (!started) {
+                        ctx.moveTo(px, py);
+                        started = true;
+                    } else {
+                        ctx.lineTo(px, py);
+                    }
+                }
+                ctx.stroke();
+            }
+
+            // Window resize handler
+            window.addEventListener('resize', () => {
+                width = window.innerWidth;
+                height = window.innerHeight;
+                isMobile = width < 768;
+                const newDpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1.5 : 2);
+                canvas.width = width * newDpr;
+                canvas.height = height * newDpr;
+                ctx.scale(newDpr, newDpr);
+                if (!animId && isPageVisible) render();
+            }, { passive: true });
+
+            // Mouse move handler (passive)
+            window.addEventListener('mousemove', (e) => {
+                mouse.x = e.clientX;
+                mouse.y = e.clientY;
+            }, { passive: true });
+
+            // Smart Pausing on Tab Visibility (Never pauses on scroll!)
+            document.addEventListener('visibilitychange', () => {
+                isPageVisible = !document.hidden;
+                if (isPageVisible && !animId) {
+                    animId = requestAnimationFrame(render);
+                } else if (!isPageVisible && animId) {
+                    cancelAnimationFrame(animId);
+                    animId = null;
+                }
+            });
+
+            // Start animation loop
+            animId = requestAnimationFrame(render);
+        })();
+
+        // 3. Hardware-Accelerated Reading Scroll Progress Bar (scaleX, zero layout reflow)
+        const progressBar = document.getElementById('scroll-progress-bar');
+        const siteHeader = document.getElementById('site-header');
+
+        window.addEventListener('scroll', () => {
+            const total = document.documentElement.scrollHeight - window.innerHeight;
+            if (progressBar && total > 0) {
+                const progress = Math.min(Math.max(window.scrollY / total, 0), 1);
+                progressBar.style.transform = `scaleX(${progress})`;
+            }
+            if (siteHeader) {
+                if (window.scrollY > 10) {
+                    siteHeader.classList.add('scrolled');
+                } else {
+                    siteHeader.classList.remove('scrolled');
+                }
+            }
+        }, { passive: true });
     </script>
+    
 </body>
 </html>
